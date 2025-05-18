@@ -35,7 +35,7 @@ describe('Helper functions', () => {
         expect(() =>
             // @ts-expect-error - function param with false type
             getMapKeyByValue('abc', 'alpha'),
-        ).toThrow('Invalid param: please provide an intance of Map.');
+        ).toThrow('Invalid param: please provide an instance of Map.');
     });
 
     test('Check alphabet', () => {
@@ -107,7 +107,7 @@ describe('Helper functions', () => {
                 ALPHABET_EN.map(lowerCaseChar => lowerCaseChar.toUpperCase()),
             );
         expect(getRandomAsciiChar()).toMatch(
-            /[a-zA-Z0-9 !"#$%\\'()*+,-./:;<=>?@`[~\]^_{|}]{1}/g,
+            /[a-zA-Z0-9 !"#$%&'()*+,-./:;<=>?@`[\\~\]^_{|}]{1}/g,
         );
 
         let randomAsciiChars = '';

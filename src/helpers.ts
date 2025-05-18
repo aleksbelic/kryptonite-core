@@ -38,7 +38,7 @@ export function getMapKeyByValue(
     value: string,
 ): string | undefined {
     if (!(map instanceof Map)) {
-        throw new Error('Invalid param: please provide an intance of Map.');
+        throw new Error('Invalid param: please provide an instance of Map.');
     }
 
     for (const [k, v] of map) {
