@@ -4,15 +4,16 @@
         "module": "ES2015",
         "strictNullChecks": true,
         "sourceMap": false,
-        "rootDir": ".",
+        "rootDir": "./src",
         "outDir": "./dist",
         "skipLibCheck": true,
         "esModuleInterop": true,
         "noEmitOnError": true,
         "noImplicitAny": true,
         "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "declaration": true
     },
-    "include": ["**/*.ts"],
+    "include": ["src/**/*.ts"],
     "exclude": ["./node_modules"]
 }
