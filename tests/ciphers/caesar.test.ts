@@ -1,4 +1,4 @@
-import { describe, expect, jest, test } from '@jest/globals';
+import { describe, expect, test, vi } from 'vitest';
 import {
     encrypt,
     decrypt,
@@ -148,7 +148,7 @@ describe('Caesar cipher - decryption', () => {
 
 describe('Caesar cipher - console.log output', () => {
     test('Print shift', () => {
-        const consoleLogSpy = jest.spyOn(global.console, 'log');
+        const consoleLogSpy = vi.spyOn(global.console, 'log');
 
         printShift('abc', { shift: 1 });
 
@@ -161,7 +161,7 @@ describe('Caesar cipher - console.log output', () => {
     });
 
     test('Print all shift', () => {
-        const consoleLogSpy = jest.spyOn(global.console, 'log');
+        const consoleLogSpy = vi.spyOn(global.console, 'log');
 
         printAllShifts('a', { alphabet: ['a', 'b', 'c'] });
 

@@ -1,6 +1,0 @@
-{
-    "verbose": true,
-    "collectCoverage": true,
-    "passWithNoTests": false,
-    "testRegex": ["/dist/tests/.*\\.test\\.js$"]
-}

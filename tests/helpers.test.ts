@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test } from 'vitest';
 import { ALPHABET_EN, ASCII_PRINTABLE_SPECIAL, DIGITS } from '../src/globals';
 import {
     checkAlphabet,

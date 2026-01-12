@@ -63,9 +63,14 @@ Linting config can be found in `eslint.config.mjs`.
 
 ## Testing
 
-Unit tests are run by [Jest](https://jestjs.io/) testing framework.
-Test results also include test-coverage.
+Unit tests are run by [Vitest](https://vitest.dev/) testing framework.
 
 ```
 $ npm run test
+```
+
+Results can also include test-coverage:
+
+```
+$ npm run test-coverage
 ```

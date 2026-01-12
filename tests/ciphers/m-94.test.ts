@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test } from 'vitest';
 import { encrypt } from '../../src/ciphers/m-94';
 
 const possibleCiphertexts = [
