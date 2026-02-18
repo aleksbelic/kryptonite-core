@@ -148,7 +148,7 @@ describe('Caesar cipher - decryption', () => {
 
 describe('Caesar cipher - console.log output', () => {
     test('Print shift', () => {
-        const consoleLogSpy = vi.spyOn(global.console, 'log');
+        const consoleLogSpy = vi.spyOn(globalThis.console, 'log');
 
         printShift('abc', { shift: 1 });
 
@@ -161,7 +161,7 @@ describe('Caesar cipher - console.log output', () => {
     });
 
     test('Print all shift', () => {
-        const consoleLogSpy = vi.spyOn(global.console, 'log');
+        const consoleLogSpy = vi.spyOn(globalThis.console, 'log');
 
         printAllShifts('a', { alphabet: ['a', 'b', 'c'] });
 
@@ -171,6 +171,71 @@ describe('Caesar cipher - console.log output', () => {
         expect(consoleLogSpy).toHaveBeenNthCalledWith(2, 'b');
         expect(consoleLogSpy).toHaveBeenNthCalledWith(3, 'c');
         expect(consoleLogSpy.mock.calls).toEqual([['a'], ['b'], ['c']]);
+
+        consoleLogSpy.mockRestore();
+    });
+
+    test('Print all shift without options', () => {
+        const consoleLogSpy = vi.spyOn(globalThis.console, 'log');
+
+        printAllShifts('a');
+
+        expect(consoleLogSpy).toHaveBeenCalled();
+        expect(consoleLogSpy).toHaveBeenCalledTimes(26);
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(1, 'a');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(2, 'b');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(3, 'c');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(4, 'd');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(5, 'e');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(6, 'f');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(7, 'g');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(8, 'h');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(9, 'i');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(10, 'j');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(11, 'k');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(12, 'l');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(13, 'm');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(14, 'n');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(15, 'o');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(16, 'p');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(17, 'q');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(18, 'r');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(19, 's');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(20, 't');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(21, 'u');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(22, 'v');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(23, 'w');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(24, 'x');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(25, 'y');
+        expect(consoleLogSpy).toHaveBeenNthCalledWith(26, 'z');
+        expect(consoleLogSpy.mock.calls).toEqual([
+            ['a'],
+            ['b'],
+            ['c'],
+            ['d'],
+            ['e'],
+            ['f'],
+            ['g'],
+            ['h'],
+            ['i'],
+            ['j'],
+            ['k'],
+            ['l'],
+            ['m'],
+            ['n'],
+            ['o'],
+            ['p'],
+            ['q'],
+            ['r'],
+            ['s'],
+            ['t'],
+            ['u'],
+            ['v'],
+            ['w'],
+            ['x'],
+            ['y'],
+            ['z'],
+        ]);
 
         consoleLogSpy.mockRestore();
     });

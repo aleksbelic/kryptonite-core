@@ -72,9 +72,10 @@ export function encrypt(plaintext: string): string {
     let ciphertext = '';
     do {
         const randomCiphertextIndex = Math.floor(Math.random() * discLength);
-        ciphertext = rotatedDiscs
-            .map(disk => disk[randomCiphertextIndex])
-            .join('');
+        ciphertext = Array.from(
+            rotatedDiscs,
+            disk => disk[randomCiphertextIndex],
+        ).join('');
     } while (ciphertext === normalizedPlaintext);
 
     return ciphertext;
@@ -149,7 +150,7 @@ export function decrypt(ciphertext: string): string[] {
 
     const rotatedDiscsPlaintexts = [];
     for (let i = 0; i < rotatedDiscs[0].length; i++) {
-        const plaintext = rotatedDiscs.map(disk => disk[i]).join('');
+        const plaintext = Array.from(rotatedDiscs, disk => disk[i]).join('');
         rotatedDiscsPlaintexts.push(plaintext);
     }
     return rotatedDiscsPlaintexts;
