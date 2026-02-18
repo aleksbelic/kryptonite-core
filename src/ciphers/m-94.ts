@@ -69,7 +69,7 @@ export function encrypt(plaintext: string): string {
 
     const discLength = rotatedDiscs[0].length;
 
-    let ciphertext = '';
+    let ciphertext: string;
     do {
         const randomCiphertextIndex = Math.floor(Math.random() * discLength);
         ciphertext = Array.from(

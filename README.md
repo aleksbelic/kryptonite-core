@@ -3,7 +3,7 @@
 ![testing workflow](https://github.com/aleksbelic/kryptonite-core/actions/workflows/tests.yml/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/aleksbelic/kryptonite-core)](https://raw.githubusercontent.com/aleksbelic/kryptonite-core/release/1.0.0/LICENSE)
 
-TypeScript cryptographic library.
+TypeScript cryptography library.
 
 ## Content
 
@@ -12,7 +12,7 @@ TypeScript cryptographic library.
 | Atbash                  | monoalphabetic substitution  |   &#9989;   |
 | Bacon's (v1, v2)        | substitution & steganography |   &#9989;   |
 | Caesar                  | monoalphabetic substitution  |   &#9989;   |
-| M-94 (CSP-488 for Navy) |                              |   &#9989;   |
+| M-94 (CSP-488 for Navy) | polyalphabetic substitution  |   &#9989;   |
 | Morse code              | monoalphabetic substitution  |   &#9989;   |
 | Polybius square         |                              |             |
 | Porta                   | polyalphabetic substitution  |   &#9989;   |

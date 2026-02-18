@@ -266,7 +266,7 @@ export function sortCharCountArray(
     charCountArray: Array<{ char: string; count: number }>,
     sortType = 'dsc',
 ): Array<{ char: string; count: number }> {
-    let sortedCharCountArray: Array<{ char: string; count: number }> = [];
+    let sortedCharCountArray: Array<{ char: string; count: number }>;
     if (sortType.toLowerCase() === 'dsc') {
         sortedCharCountArray = charCountArray.sort(
             (char1, char2) => char2.count - char1.count,
