@@ -1,19 +1,18 @@
 {
     "compilerOptions": {
         "target": "ES2021",
-        "module": "ES2015",
-        "strictNullChecks": true,
+        "module": "ESNext",
+        "strict": true,
         "sourceMap": false,
         "rootDir": "./src",
         "outDir": "./dist",
+        "declaration": true,
+        "emitDeclarationOnly": false,
         "skipLibCheck": true,
         "esModuleInterop": true,
         "noEmitOnError": true,
-        "noImplicitAny": true,
         "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "node",
-        "declaration": true
+        "moduleResolution": "node"
     },
-    "include": ["src/**/*.ts"],
-    "exclude": ["./node_modules"]
+    "include": ["src/**/*.ts"]
 }

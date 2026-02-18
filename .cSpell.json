@@ -1,5 +1,13 @@
 {
     "version": "0.2",
     "language": "en",
-    "words": ["Aleksandar", "Belic", "Aleksanchez", "ciphertext"]
+    "words": [
+        "Aleksandar",
+        "Belic",
+        "Aleksanchez",
+        "ciphertext",
+        "ciphertexts",
+        "plaintext",
+        "plaintexts"
+    ]
 }

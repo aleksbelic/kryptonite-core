@@ -39,12 +39,12 @@ const discs: string[] = [
  * // returns 'ZJXJLGIXOXJWCMPQRSTUVWXYZ'
  */
 export function encrypt(plaintext: string): string {
-    plaintext = plaintext.replace(/\s/g, '');
-    plaintext = plaintext.toUpperCase();
+    const rotatedDiscs = [...discs];
+    const normalizedPlaintext = plaintext.replace(/\s/g, '').toUpperCase();
 
     const upperCaseAlphabet = ALPHABET_EN.map(char => char.toUpperCase());
 
-    for (const currentChar of plaintext) {
+    for (const currentChar of normalizedPlaintext) {
         if (!upperCaseAlphabet.includes(currentChar)) {
             throw new Error(
                 'Plaintext can contain only English alphabet letters.',
@@ -52,29 +52,105 @@ export function encrypt(plaintext: string): string {
         }
     }
 
-    if (plaintext.length > discs.length) {
+    if (normalizedPlaintext.length > rotatedDiscs.length) {
         throw new Error(
-            `Invalid length: plaintext should not be longer than ${discs.length} characters.`,
+            `Invalid length: plaintext should not be longer than ${rotatedDiscs.length} characters.`,
         );
     }
 
-    for (let index = 0; index < plaintext.length; index++) {
-        const charPositionOnDisc = discs[index].indexOf(plaintext[index]);
-        discs[index] =
-            discs[index].slice(charPositionOnDisc) +
-            discs[index].slice(0, charPositionOnDisc);
+    for (let index = 0; index < normalizedPlaintext.length; index++) {
+        const charPositionOnDisc = rotatedDiscs[index].indexOf(
+            normalizedPlaintext[index],
+        );
+        rotatedDiscs[index] =
+            rotatedDiscs[index].slice(charPositionOnDisc) +
+            rotatedDiscs[index].slice(0, charPositionOnDisc);
     }
 
-    const discLength = discs[0].length;
-    const randomCipherTextIndex =
-        Math.floor(Math.random() * discLength - 1) + 1;
-
-    console.log(`Random index: ${randomCipherTextIndex}`);
+    const discLength = rotatedDiscs[0].length;
 
     let ciphertext = '';
-    for (const disk of discs) {
-        ciphertext += disk[randomCipherTextIndex];
-    }
+    do {
+        const randomCiphertextIndex = Math.floor(Math.random() * discLength);
+        ciphertext = rotatedDiscs
+            .map(disk => disk[randomCiphertextIndex])
+            .join('');
+    } while (ciphertext === normalizedPlaintext);
 
     return ciphertext;
+}
+
+/**
+ * [M-94 cipher](https://en.wikipedia.org/wiki/M-94) decryption
+ *
+ * @param ciphertext text to be decrypted
+ * @returns all possible plaintexts
+ *
+ * @example
+ * decrypt('ZJXJLGIXOXJWCMPQRSTUVWXYZ')
+ * // returns
+    [
+    'KINGSANDQUEENSAAAAAAAAAAA',
+    'ZJXJLGIXOXJWCMPQRSTUVWXYZ',
+    'OKFHWPKAIYAOJFBJMDOTNVKJD',
+    'LTYLEOPIVWLAIAVNYMJRKSWPN',
+    'RLQKMCVHTITMLOHUOCYZHFRXB',
+    'XMRMZIRPZCMNDDIBFNLXRDEMU',
+    'SOTRVXOJEASFHWYTTEFQGLVVH',
+    'PUVUXLGOFKXLBPKGHQXLOIDKY',
+    'WVWOGUSBHEVHMKSIEBNYXETBF',
+    'NYLQARYWGLQQKJGMUOGIEBUQW',
+    'AGAVFNDKYBPGGVUWSZWOYHFWJ',
+    'BZDPNDUCUDNCXIEZZPHVBKOUL',
+    'CNKTQYLVNFOUUUNRJLVBFNYGV',
+    'EPONUZCFLJHJZQTVXGCPSRHLG',
+    'IQMWKHFZPGUTTHCLDVMEJJMOR',
+    'GXJYDWMLMHWBSZXXPJISMQLSC',
+    'DRUXOBQQBODYWCOCCRRNUZSTQ',
+    'JWBZPJTEXNIPQTWSWKBHDGIEM',
+    'FSGSISWRWMZZYXFHGYSJQMQCP',
+    'VBEATQAYCTYKVBQDQTEWCXNHS',
+    'UAPEJFHNRPCXOLDEIFKMLPJNO',
+    'YCHDBKXSARGIREROBUUDZUCZE',
+    'MDSCRVJUJQKSPGLKKIPGWCPFX',
+    'HECBHMEMDSRRFNJFLWDFTOGRT',
+    'THZICEZGSVFDEYZPNXZCITBIK',
+    'QFIFYTBTKZBVARMYVHQKPYZDI',
+    ];
+ */
+export function decrypt(ciphertext: string): string[] {
+    const rotatedDiscs = [...discs];
+    const normalizedCiphertext = ciphertext.replace(/\s/g, '').toUpperCase();
+
+    const upperCaseAlphabet = ALPHABET_EN.map(char => char.toUpperCase());
+
+    for (const currentChar of normalizedCiphertext) {
+        if (!upperCaseAlphabet.includes(currentChar)) {
+            throw new Error(
+                'Ciphertext can contain only English alphabet letters.',
+            );
+        }
+    }
+
+    if (normalizedCiphertext.length > rotatedDiscs.length) {
+        throw new Error(
+            `Invalid length: ciphertext should not be longer than ${rotatedDiscs.length} characters.`,
+        );
+    }
+
+    for (let index = 0; index < normalizedCiphertext.length; index++) {
+        const charPositionOnDisc = rotatedDiscs[index].indexOf(
+            normalizedCiphertext[index],
+        );
+        rotatedDiscs[index] =
+            rotatedDiscs[index].slice(charPositionOnDisc) +
+            rotatedDiscs[index].slice(0, charPositionOnDisc);
+    }
+
+    const rotatedDiscsPlaintexts = [];
+    for (let i = 0; i < rotatedDiscs[0].length; i++) {
+        const plaintext = rotatedDiscs.map(disk => disk[i]).join('');
+        rotatedDiscsPlaintexts.push(plaintext);
+    }
+    return rotatedDiscsPlaintexts;
 }

@@ -12,7 +12,7 @@ TypeScript cryptographic library.
 | Atbash                  | monoalphabetic substitution  |   &#9989;   |
 | Bacon's (v1, v2)        | substitution & steganography |   &#9989;   |
 | Caesar                  | monoalphabetic substitution  |   &#9989;   |
-| M-94 (CSP-488 for Navy) |                              |             |
+| M-94 (CSP-488 for Navy) |                              |   &#9989;   |
 | Morse code              | monoalphabetic substitution  |   &#9989;   |
 | Polybius square         |                              |             |
 | Porta                   | polyalphabetic substitution  |   &#9989;   |
