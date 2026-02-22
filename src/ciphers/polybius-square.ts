@@ -68,13 +68,17 @@ export function encrypt(
                 colIndex++
             ) {
                 if (
-                    char.toLowerCase() ===
-                    alphabet[rowIndex][colIndex].toLowerCase()
+                    (caseSensitive === true &&
+                        char === alphabet[rowIndex][colIndex]) ||
+                    (caseSensitive === false &&
+                        char.toLowerCase() ===
+                            alphabet[rowIndex][colIndex].toLowerCase())
                 ) {
                     charEncrypted = `${rowIndex + 1}${colIndex + 1}`;
                     break;
                 }
             }
+
             if (charEncrypted !== undefined) break;
         }
 
