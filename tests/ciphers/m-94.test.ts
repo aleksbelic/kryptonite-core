@@ -56,7 +56,6 @@ describe('M-94 cipher - encryption', () => {
     });
 
     test('handles mixed case input', () => {
-        console.log('XXXXXXX', encrypt('Kings And Queens'));
         expect(
             possibleCiphertexts.includes(encrypt('Kings And Queens')),
         ).toEqual(true);
