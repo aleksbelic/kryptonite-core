@@ -1,11 +1,3 @@
-const polybiusSquareGreek = [
-    ['A', 'B', 'Γ', 'Δ', 'E'],
-    ['Z', 'H', 'Θ', 'I', 'K'],
-    ['Λ', 'M', 'N', 'Ξ', 'O'],
-    ['Π', 'P', 'Σ', 'T', 'Y'],
-    ['Φ', 'X', 'Ψ', 'Ω'],
-];
-
 // note: 25 letters in total since "I" and "J" are represented by the same letter
 const polybiusSquareLatin = [
     ['A', 'B', 'C', 'D', 'E'],
@@ -17,49 +9,44 @@ const polybiusSquareLatin = [
 
 /**
  * [Polybius square](https://en.wikipedia.org/wiki/Polybius_square) encryption.
+ *
+ * @param plaintext text to be encrypted
+ * @returns ciphertext, the encrypted text
+ *
+ * @example
+ * encrypt('HELLO WORLD')
+ * // returns '23 15 31 31 34 52 34 42 31 14'
+ *
+ * encrypt('HELLO WORLD', { separator: '-' })
+ * // returns '23-15-31-31-34-52-34-42-31-14'
  */
 export function encrypt(
     plaintext: string,
     options?: {
-        alphabet?: 'latin' | 'greek' | string[][];
+        alphabet?: string[][];
         separator?: string;
         caseSensitive?: boolean;
         includeForeignChars?: boolean;
     },
 ): string {
-    if (
-        options?.alphabet !== 'latin' &&
-        options?.alphabet !== 'greek' &&
-        options?.alphabet !== undefined &&
-        !Array.isArray(options?.alphabet)
-    ) {
+    if (options?.alphabet && !Array.isArray(options?.alphabet)) {
         throw new Error(
-            "Invalid param: alphabet should be either 'latin', 'greek' or a custom string[][].",
+            'Invalid param: alphabet should be a custom 2D array of strings.',
         );
     }
 
-    let alphabet: string[][];
-    if (options?.alphabet === 'latin') {
-        alphabet = polybiusSquareLatin;
-    } else if (options?.alphabet === 'greek') {
-        alphabet = polybiusSquareGreek;
-    } else if (Array.isArray(options?.alphabet)) {
-        alphabet = options?.alphabet;
-    } else {
-        alphabet = polybiusSquareLatin;
-    }
-
     const {
+        alphabet = polybiusSquareLatin,
         separator = ' ',
         includeForeignChars = true,
         caseSensitive = false,
     } = options || {};
 
-    let ciphertext = '';
+    let encryptedChars: string[] = [];
 
     for (let charIndex = 0; charIndex < plaintext.length; charIndex++) {
         const char = plaintext[charIndex];
-        let charEncrypted: string | undefined;
+        let encryptedChar: string | undefined = undefined;
 
         for (let rowIndex = 0; rowIndex < alphabet.length; rowIndex++) {
             for (
@@ -71,29 +58,25 @@ export function encrypt(
                     (caseSensitive === true &&
                         char === alphabet[rowIndex][colIndex]) ||
                     (caseSensitive === false &&
-                        char.toLowerCase() ===
-                            alphabet[rowIndex][colIndex].toLowerCase())
+                        char.toLocaleLowerCase() ===
+                            alphabet[rowIndex][colIndex].toLocaleLowerCase())
                 ) {
-                    charEncrypted = `${rowIndex + 1}${colIndex + 1}`;
+                    encryptedChar = `${rowIndex + 1}${colIndex + 1}`;
                     break;
                 }
             }
 
-            if (charEncrypted !== undefined) break;
+            if (encryptedChar) break;
         }
 
-        if (charEncrypted !== undefined) {
-            ciphertext += charEncrypted;
+        if (encryptedChar) {
+            encryptedChars.push(encryptedChar);
         } else if (includeForeignChars) {
-            ciphertext += char;
-        }
-
-        if (charIndex < plaintext.length - 1) {
-            ciphertext += separator;
+            encryptedChars.push(char);
         }
     }
 
-    return ciphertext;
+    return encryptedChars.join(separator);
 }
 
 /**
