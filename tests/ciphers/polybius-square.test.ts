@@ -15,7 +15,7 @@ describe('Polybius square cipher - encryption', () => {
         expect(encrypt('HELLO WORLD')).toEqual(
             '23 15 31 31 34   52 34 42 31 14',
         );
-        expect(encrypt('ij')).toEqual('24 24'); // 'I' and 'J' share the same coordinates in the default latin alphabet
+        expect(encrypt('ij')).toEqual('24 24'); // 'I' and 'J' share the same coordinates in the default Latin alphabet
         expect(encrypt('iIi jJj')).toEqual('24 24 24   24 24 24');
     });
 

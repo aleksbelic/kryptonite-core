@@ -8,25 +8,25 @@ const polybiusSquareLatin = [
 ];
 
 /**
- * {@link https://en.wikipedia.org/wiki/Polybius_square | Polybius square} encryption
+ * {@link https://en.wikipedia.org/wiki/Polybius_square | Polybius square} encryption.
  *
  * @param plaintext - text to be encrypted
- * @param options - encryption config object
- * @param alphabet - 2D string array representing the Polybius square alphabet, where the first dimension represents rows and the second dimension represents columns. Default is the `latin alphabet` with "I" and "J" sharing the same cell to make it 25 letters.
- * @param separator - string used to separate encrypted characters in the output; default is a single space (`' '`)
- * @param caseSensitive - if correct input of upper case and lower case matters; default is `false`, meaning that the case of the input characters will be ignored
- * @param includeForeignChars - if unknown char should be included in plaintext; default is `true`, meaning that characters not found in the provided alphabet will be included in the output as they are
+ * @param options - encryption config:
+ *
+ * - `alphabet` - 2D string array representing the Polybius square alphabet, where the first dimension represents rows and the second dimension represents columns. Default is the `Latin alphabet` with "I" and "J" sharing the same cell to make it 25 letters.
+ * - `separator` - string used to separate encrypted characters in the output; default is a single space (`' '`)
+ * - `caseSensitive` - if correct input of upper case and lower case matters; default is `false`, meaning that the case of the input characters will be ignored
+ * - `includeForeignChars` - if unknown char should be included in plaintext; default is `true`, meaning that characters not found in the provided alphabet will be included in the output as they are
+ *
  * @returns ciphertext, the encrypted text
  *
- * @throws Error
- * Thrown if given alphabet is not a valid 2D array of strings
+ * @throws Error thrown if given alphabet is not a valid 2D array of strings
  *
  * @example
  * ```ts
  * encrypt('HELLO WORLD')
  * // returns '23 15 31 31 34 52 34 42 31 14'
- * ```
- * ```ts
+ *
  * encrypt('HELLO WORLD', { separator: '-' })
  * // returns '23-15-31-31-34-52-34-42-31-14'
  * ```
@@ -108,10 +108,12 @@ export function encrypt(
  * [Polybius square](https://en.wikipedia.org/wiki/Polybius_square) decryption.
  *
  * @param ciphertext - text to be decrypted
- * @param options - decryption config object
- * @param alphabet - 2D string array representing the Polybius square alphabet. Default is the `latin alphabet` with "I" and "J" sharing the same cell.
- * @param separator - string used to separate encrypted characters; default is a single space (`' '`)
- * @param includeForeignChars - if true, characters not in given alphabet will also be included as-is; default is `true`
+ * @param options - decryption config:
+ *
+ * - `alphabet` - 2D string array representing the Polybius square alphabet. Default is the `Latin alphabet` with "I" and "J" sharing the same cell.
+ * - `separator` - string used to separate encrypted characters; default is a single space (`' '`)
+ * - `includeForeignChars` - if true, characters not in given alphabet will also be included as-is; default is `true`
+ *
  * @returns plaintext, the decrypted text
  *
  * @throws Error thrown if given alphabet is not a valid 2D array of strings

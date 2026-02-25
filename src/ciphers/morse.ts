@@ -1,17 +1,29 @@
 import { morseCodeMap } from '../globals';
 import { getMapKeyByValue } from '../helpers';
 
+const defaultConfig = {
+    short: '.',
+    long: '-',
+    space: '/',
+};
+
 /**
- * [Morse code](https://en.wikipedia.org/wiki/Morse_code) encryption.
+ * {@link https://en.wikipedia.org/wiki/Morse_code | Morse code} encryption.
  *
- * @param plaintext text to be encrypted
- * @param options optional encoding options
- * @param options.short symbol to represent short signals (e.g., dots (".") in Morse code)
- * @param options.long symbol to represent long signals (e.g., dashes ("-") in Morse code)
- * @param options.space symbol to represent spaces between words
+ * @param plaintext - text to be encrypted
+ * @param options - encryption config:
+ *
+ * - `short` - symbol to represent short signals; default is dot (`.`)
+ * - `long` - symbol to represent long signals; default is dash (`-`)
+ * - `space` - symbol to represent spaces between words; default is slash (`/`)
+ *
  * @returns ciphertext, the encrypted text
  *
+ * @throws Error thrown if any of the provided symbols for short, long or space are the same
+ * @throws Error if plaintext contains characters not defined in Morse code
+ *
  * @example
+ * ```ts
  * encrypt('abc')
  * //returns '.- -... -.-.'
  *
@@ -20,6 +32,7 @@ import { getMapKeyByValue } from '../helpers';
  *
  * encrypt('x y z', { short: 'o', long: '=', space: '#' })
  * // returns '=oo= # =o== # ==oo'
+ * ```
  */
 export function encrypt(
     plaintext: string,
@@ -29,7 +42,11 @@ export function encrypt(
         space?: string;
     },
 ): string {
-    const { short = '.', long = '-', space = '/' } = options || {};
+    const {
+        short = defaultConfig.short,
+        long = defaultConfig.long,
+        space = defaultConfig.space,
+    } = options ?? {};
 
     if (
         [short, long, space].join('') !==
@@ -41,7 +58,7 @@ export function encrypt(
     }
 
     let ciphertextWord;
-    const cipertextArray: string[] = [];
+    const ciphertextArray: string[] = [];
     for (const currentWord of plaintext.toLowerCase().split(/\s/g)) {
         ciphertextWord = [];
         for (const currentChar of currentWord) {
@@ -57,22 +74,28 @@ export function encrypt(
                     .replaceAll('-', long),
             );
         }
-        cipertextArray.push(ciphertextWord.join(' '));
+        ciphertextArray.push(ciphertextWord.join(' '));
     }
-    return cipertextArray.join(` ${space} `);
+    return ciphertextArray.join(` ${space} `);
 }
 
 /**
- * [Morse code](https://en.wikipedia.org/wiki/Morse_code) decryption.
+ * {@link https://en.wikipedia.org/wiki/Morse_code | Morse code} decryption.
  *
- * @param ciphertext text to be decrypted
- * @param options optional decoding options
- * @param options.short symbol to represent short signals (e.g., dots in Morse code)
- * @param options.long symbol to represent long signals (e.g., dashes in Morse code)
- * @param options.space symbol to represent spaces between words
+ * @param ciphertext - text to be decrypted
+ * @param options - decryption config:
+ *
+ * - `short` - symbol to represent short signals; default is dot (`.`)
+ * - `long` - symbol to represent long signals; default is dash (`-`)
+ * - `space` - symbol to represent spaces between words; default is slash (`/`)
+ *
  * @returns plaintext, the decrypted text
  *
+ * @throws Error thrown if any of the provided symbols for short, long or space are the same
+ * @throws Error thrown if any of the characters in ciphertext cannot be decrypted using Morse code
+ *
  * @example
+ * ```ts
  * decrypt('.- -... -.-.')
  * // returns 'abc'
  *
@@ -81,6 +104,7 @@ export function encrypt(
  *
  * decrypt('=oo= # =o== # ==oo', { short: 'o', long: '=', space: '#' })
  * // returns 'x y z'
+ * ```
  */
 export function decrypt(
     ciphertext: string,
@@ -90,7 +114,11 @@ export function decrypt(
         space?: string;
     },
 ): string {
-    const { short = '.', long = '-', space = '/' } = options || {};
+    const {
+        short = defaultConfig.short,
+        long = defaultConfig.long,
+        space = defaultConfig.space,
+    } = options ?? {};
 
     if (
         [short, long, space].join('') !==

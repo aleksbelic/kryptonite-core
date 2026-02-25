@@ -1,17 +1,26 @@
 import { ALPHABET_EN } from '../globals';
 import { checkAlphabet, getShiftedChar, isUpperCase } from '../helpers';
 
+const defaultConfig = {
+    caseSensitive: true,
+    includeForeignChars: true,
+    alphabet: ALPHABET_EN,
+};
+
 /**
- * [Atbash cipher](https://en.wikipedia.org/wiki/Atbash) encryption.
+ * {@link https://en.wikipedia.org/wiki/Atbash | Atbash cipher} encryption.
  *
- * @param plaintext text to encrypt
- * @param options configuration for encryption
- * @param options.caseSensitive if correct input of upper case and lower case matters, default is **true**
- * @param options.includeForeignChars if unknown char should be included in ciphertext, default is **true**
- * @param options.alphabet alphabet used for encryption process, default is **English alphabet**
+ * @param plaintext - text to encrypt
+ * @param options - encryption config:
+ *
+ * - `caseSensitive` - if correct input of upper case and lower case matters; default is `true`
+ * - `includeForeignChars` - if unknown char should be included in ciphertext; default is `true`
+ * - `alphabet` - alphabet used for encryption process; default is `English alphabet`
+ *
  * @returns ciphertext, the encrypted text
  *
  * @example
+ * ```ts
  * encrypt('abc')
  * // returns 'zyx'
  *
@@ -23,6 +32,7 @@ import { checkAlphabet, getShiftedChar, isUpperCase } from '../helpers';
  *
  * encrypt('ћшчшћћ', { alphabet: ['ш', 'ч', 'ћ'] })
  * // returns 'шћчћшш'
+ * ```
  */
 export function encrypt(
     plaintext: string,
@@ -33,10 +43,10 @@ export function encrypt(
     },
 ): string {
     const {
-        caseSensitive = true,
-        includeForeignChars = true,
-        alphabet = ALPHABET_EN,
-    } = options || {};
+        caseSensitive = defaultConfig.caseSensitive,
+        includeForeignChars = defaultConfig.includeForeignChars,
+        alphabet = defaultConfig.alphabet,
+    } = options ?? {};
 
     checkAlphabet(alphabet!);
 
@@ -65,16 +75,19 @@ export function encrypt(
 }
 
 /**
- * [Atbash cipher](https://en.wikipedia.org/wiki/Atbash) decryption.
+ * {@link https://en.wikipedia.org/wiki/Atbash | Atbash cipher} decryption.
  *
- * @param ciphertext text to decrypt
- * @param options configuration for decryption
- * @param options.caseSensitive if correct input of upper case and lower case matters, default is **true**
- * @param options.includeForeignChars if unknown char should be included in plaintext, default is **true**
- * @param options.alphabet alphabet used for decryption process, default is **English alphabet**
+ * @param ciphertext - text to decrypt
+ * @param options - decryption config:
+ *
+ * - `caseSensitive` - if correct input of upper case and lower case matters; default is `true`
+ * - `includeForeignChars` - if unknown char should be included in plaintext; default is `true`
+ * - `alphabet` - alphabet used for decryption process; default is `English alphabet`
+ *
  * @returns plaintext, the decrypted text
  *
  * @example
+ * ```ts
  * decrypt('zyx')
  * // returns 'abc'
  *
@@ -86,6 +99,7 @@ export function encrypt(
  *
  * decrypt('шћчћшш', { alphabet: ['ш', 'ч', 'ћ'] })
  * // returns 'ћшчшћћ'
+ * ```
  */
 export function decrypt(
     ciphertext: string,
@@ -96,10 +110,10 @@ export function decrypt(
     },
 ): string {
     const {
-        caseSensitive = true,
-        includeForeignChars = true,
-        alphabet = ALPHABET_EN,
-    } = options || {};
+        caseSensitive = defaultConfig.caseSensitive,
+        includeForeignChars = defaultConfig.includeForeignChars,
+        alphabet = defaultConfig.alphabet,
+    } = options ?? {};
 
     return encrypt(ciphertext, {
         caseSensitive,

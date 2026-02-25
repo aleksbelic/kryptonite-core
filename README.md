@@ -3,7 +3,7 @@
 ![testing workflow](https://github.com/aleksbelic/kryptonite-core/actions/workflows/tests.yml/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/aleksbelic/kryptonite-core)](https://raw.githubusercontent.com/aleksbelic/kryptonite-core/release/1.0.0/LICENSE)
 
-TypeScript cryptography library.
+#### Collection of classical ciphers implemented in TypeScript.
 
 ## Content
 
@@ -14,7 +14,7 @@ TypeScript cryptography library.
 | Caesar                  | monoalphabetic substitution  |   &#9989;   |
 | M-94 (CSP-488 for Navy) | polyalphabetic substitution  |   &#9989;   |
 | Morse code              | monoalphabetic substitution  |   &#9989;   |
-| Polybius square         |                              |             |
+| Polybius square         | monoalphabetic substitution  |   &#9989;   |
 | Porta                   | polyalphabetic substitution  |   &#9989;   |
 | Rail Fence              | transposition                |   &#9989;   |
 | ROT5                    | monoalphabetic substitution  |   &#9989;   |
@@ -32,7 +32,7 @@ npm install kryptonite-core
 
 ## Usage
 
-```typescript
+```ts
 import { caesar } from 'kryptonite-core';
 
 // Caesar cipher

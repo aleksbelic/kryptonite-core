@@ -1,9 +1,12 @@
 {
     "name": "kryptonite-core",
     "version": "1.0.0",
-    "description": "TypeScript cryptographic library",
+    "description": "Collection of classical ciphers implemented in TypeScript.",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "type": "module",
     "scripts": {
         "build": "tsc",

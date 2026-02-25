@@ -1,12 +1,17 @@
+const defaultColumnCount = 4;
+
 /**
- * [Scytale cipher](https://en.wikipedia.org/wiki/Scytale) encryption
+ * {@link https://en.wikipedia.org/wiki/Scytale | Scytale cipher} encryption.
  *
- * @param plaintext text to be encrypted
- * @param options configuration for encryption
- * @param options.columnCount number of text columns created by wounding plaintext around a scytale
+ * @param plaintext - text to be encrypted
+ * @param options - encryption config:
+ *
+ * - `columnCount` - number of text columns created by wounding plaintext around a scytale; default is `4`
+ *
  * @returns ciphertext, the encrypted text
  *
  * @example
+ * ```ts
  * encrypt('abcdef')
  * // returns 'aebfc d'
  *
@@ -15,12 +20,13 @@
  *
  * encrypt('abcdef', { columnCount: 5 })
  * // returns 'afb c d e'
+ * ```
  */
 export function encrypt(
     plaintext: string,
-    options?: { columnCount: number },
+    options?: { columnCount?: number },
 ): string {
-    const { columnCount = 4 } = options || {};
+    const { columnCount = defaultColumnCount } = options ?? {};
 
     if (columnCount < 1) {
         throw new Error(
@@ -42,14 +48,17 @@ export function encrypt(
 }
 
 /**
- * [Scytale cipher](https://en.wikipedia.org/wiki/Scytale) decryption
+ * {@link https://en.wikipedia.org/wiki/Scytale | Scytale cipher} decryption.
  *
- * @param ciphertext text to be decrypted
- * @param options configuration for decryption
- * @param options.columnCount number of text columns created by wounding ciphertext around a scytale
+ * @param ciphertext - text to be decrypted
+ * @param options - decryption config:
+ *
+ * - `columnCount` - number of text columns created by wounding ciphertext around a scytale; default is `4`
+ *
  * @returns plaintext, the decrypted text
  *
  * @example
+ * ```ts
  * decrypt('aebfc d')
  * // returns 'abcdef'
  *
@@ -58,12 +67,13 @@ export function encrypt(
  *
  * decrypt('afb c d e', { columnCount: 5 })
  * // returns 'abcdef'
+ * ```
  */
 export function decrypt(
     ciphertext: string,
     options?: { columnCount?: number },
 ): string {
-    const { columnCount = 4 } = options || {};
+    const { columnCount = defaultColumnCount } = options ?? {};
 
     if (columnCount < 1) {
         throw new Error(

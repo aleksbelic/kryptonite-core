@@ -8,6 +8,8 @@
         "ciphertext",
         "ciphertexts",
         "plaintext",
-        "plaintexts"
+        "plaintexts",
+        "steganography",
+        "Scytale"
     ]
 }

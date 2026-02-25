@@ -189,7 +189,7 @@ export function printAllShifts(
         caseSensitive = true,
         includeForeignChars = true,
         alphabet = ALPHABET_EN,
-    } = options || {};
+    } = options ?? {};
 
     for (let shift = 0; shift < alphabet.length; shift++) {
         console.log(
